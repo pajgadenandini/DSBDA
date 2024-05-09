@@ -1,0 +1,194 @@
+import scala.io.StdIn.readLine
+
+object BankChatbot {
+  // Initialize balance
+  var balance = 0.0
+
+  def main(args: Array[String]): Unit = {
+    println("Welcome to Bank Chatbot")
+
+    // Prompt user to enter initial balance
+    print("Enter your initial balance: $")
+    balance = readLine().toDouble
+
+    var running = true
+
+    while (running) {
+      println("\nEnter '$withdraw <amount>' to withdraw money")
+      println("Enter '$deposit <amount>' to deposit money")
+      println("Enter '$balance' to check your balance")
+      println("Enter '$quit' to exit")
+
+      print("\nEnter your command: $")
+      val input = readLine().trim.toLowerCase
+
+      val command = input.split("\\s+")
+
+      command.head match {
+        case "$withdraw" => 
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            withdraw(amount)
+          } else {
+            println("Invalid command. Usage: $withdraw <amount>")
+          }
+
+        case "$deposit" =>
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            deposit(amount)
+          } else {
+            println("Invalid command. Usage: $deposit <amount>")
+          }
+
+        case "$balance" => 
+          println(s"Your current balance is $$${balance.formatted("%.2f")}")
+
+        case "$quit" => 
+          println("Exiting Bank Chatbot...")
+          running = false
+
+        case _ => 
+          println("Invalid command")
+      }
+    }
+  }
+
+  def withdraw(amount: Double): Unit = {
+    if (amount > balance) {
+      println("Insufficient funds")
+    } else {
+      balance -= amount
+      println(s"Withdrew $$${amount.formatted("%.2f")}. Your current balance is $$${balance.formatted("%.2f")}")
+    }
+  }
+
+  def deposit(amount: Double): Unit = {
+    balance += amount
+    println(s"Deposited $$${amount.formatted("%.2f")}. Your current balance is $$${balance.formatted("%.2f")}")
+  }
+}
+
+// Uncomment the line below to run the program
+// BankChatbot.main(Array.empty)
+
+1 Copy the code into a file named BankChatbot.scala.
+2 Open your terminal.
+3 Navigate to the directory where BankChatbot.scala is saved. or use ./bin/spark-shell
+4 Run the following commands:
+scalac BankChatbot.scala
+scala BankChatbot
+---------------------------------------------------------------------------------------
+>val data = Array(1,2,3,4,5,6)
+
+>var distdata = sc.parallelize(data)
+
+>val mappedData = distdata.map(x => x*x)
+
+>println(mappedData.collect().mkString(","))
+--------------------------------------------------------------------------------
+
+
+
+
+object BankChatbot {
+  // Initialize balance
+  var balance = 0.0
+--
+  def main(args: Array[String]): Unit = {
+    println("Welcome to Bank Chatbot")
+
+    // Prompt user to enter initial balance
+    print("Enter your initial balance: $")
+    balance = scala.io.StdIn.readLine().toDouble
+
+    var running = true
+
+    while (running) {
+      println("\nEnter '$withdraw <amount>' to withdraw money")
+      println("Enter '$deposit <amount>' to deposit money")
+      println("Enter '$balance' to check your balance")
+      println("Enter '$quit' to exit")
+
+      print("\nEnter your command: $")
+      val input = scala.io.StdIn.readLine().trim.toLowerCase
+
+      val command = input.split("\\s+")
+--
+      command.head match {
+        case "$withdraw" => 
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            withdraw(amount)
+          } else {
+            println("Invalid command. Usage: $withdraw <amount>")
+          }
+
+        case "$deposit" =>
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            deposit(amount)
+          } else {
+            println("Invalid command. Usage: $deposit <amount>")
+          }
+
+        case "$balance" => 
+          println(s"Your current balance is $$${balance.formatted("%.2f")}")
+
+        case "$quit" => 
+          println("Exiting Bank Chatbot...")
+          running = false
+
+        case _ => 
+          println("Invalid command")
+      }
+    }
+  }
+--
+      command.head match {
+        case "$withdraw" => 
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            withdraw(amount)
+          } else {
+            println("Invalid command. Usage: $withdraw <amount>")
+          }
+
+        case "$deposit" =>
+          if (command.length == 2) {
+            val amount = command(1).toDouble
+            deposit(amount)
+          } else {
+            println("Invalid command. Usage: $deposit <amount>")
+          }
+
+        case "$balance" => 
+          println(s"Your current balance is $$${balance.formatted("%.2f")}")
+
+        case "$quit" => 
+          println("Exiting Bank Chatbot...")
+          running = false
+
+        case _ => 
+          println("Invalid command")
+      }
+    }
+  }
+--
+  def withdraw(amount: Double): Unit = {
+    if (amount > balance) {
+      println("Insufficient funds")
+    } else {
+      balance -= amount
+      println(s"Withdrew $$${amount.formatted("%.2f")}. Your current balance is $$${balance.formatted("%.2f")}")
+    }
+  }
+--
+    def deposit(amount: Double): Unit = {
+    balance += amount
+    println(s"Deposited $$${amount.formatted("%.2f")}. Your current balance is $$${balance.formatted("%.2f")}")
+  }
+}
+---
+BankChatbot.main(Array.empty)
+
